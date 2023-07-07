@@ -13,7 +13,7 @@ session_start();
 </head>
 <body>
     <?php
-    var_dump($_SESSION);
+    //var_dump($_SESSION); // pour afficher les donnéé du tableau
     if(!isset($_SESSION['products']) || empty($_SESSION['products'])){
         echo "<p>Aucun produit en session</p>";
     } 
@@ -48,7 +48,7 @@ session_start();
       
     } 
     echo "</tbody>",
-        "</table"
+        "</table>"
         
         
         ?>
