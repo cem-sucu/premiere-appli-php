@@ -39,7 +39,8 @@ session_start();
                 "</tr>",
             "</thead>",
             "<tbody>";
-        $totalGenral = 0;
+     
+        $totalGeneralTemp = 0;
 
         // Vérifier si l'action de suppression est déclenchée
         if (isset($_GET['action']) && $_GET['action'] === 'supprimer' && isset($_GET['index'])) {
@@ -54,19 +55,54 @@ session_start();
             }
         }
 
+      
+        // Vérifier si une action est déclenchée
+        if (isset($_GET['action'])) {
+            $action = $_GET['action'];
+            $index = $_GET['index'];
+
+            // Vérifier l'action
+            if ($action === 'incrementer') {
+                // Incrémenter la quantité du produit correspondant
+                $_SESSION['products'][$index]['qtt']++;
+                //permet d'éxécuter l'incrémentation
+                $totalGeneralTemp += $_SESSION['products'][$index]['price'];
+            } elseif ($action === 'decrementer') {
+                // Décrémenter la quantité du produit correspondant
+                if ($_SESSION['products'][$index]['qtt'] > 1) {
+                    $_SESSION['products'][$index]['qtt']--;
+                    //permet de faire la décrémentation
+                    $totalGeneralTemp -= $_SESSION['products'][$index]['price'];
+                }
+            } elseif ($action === 'supprimer') {
+                //met a jour le total général 
+                $totalGeneralTemp -= $_SESSION['products'][$index]['total'];
+                // Supprimer le produit correspondant du tableau de session
+                unset($_SESSION['products'][$index]);
+                $_SESSION['products'] = array_values($_SESSION['products']); // Réorganiser les indices du tableau
+            }
+        }
+
+
         //genere le tableur avec les éléments et le button supprimer
         foreach($_SESSION['products'] as $index => $product){
             echo "<tr>",
                     "<td>".$index."</td>",
                     "<td>".$product['name']."</td>",
                     "<td>".number_format($product['price'], 2, ",", "&nbsp;")."&nbsp€"."</td>",
+                    "<td>",
+                        "<a href='recap.php?action=incrementer&index=".$index."'><i class='fa-solid fa-plus'></i></a>",
+                        "&nbsp;".$product['qtt']."&nbsp;",
+                        "<a href='recap.php?action=decrementer&index=".$index."'><i class='fa-solid fa-minus'></i></a>",
+                    "</td>",
                     "<td>".$product['qtt']."</td>",
                     "<td>".number_format($product['total'], 2, ",", "&nbsp;")."&nbsp€"."</td>",
                     "<td><a href=\"recap.php?action=supprimer&index=".$index."\"><i class='fa-solid fa-trash'></i></a></td>",
                 "</tr>";
-            $totalGenral += $product['total'];
+                $totalGeneralTemp += $product['qtt'] * $product['price'];
         }
 
+        $totalGeneral = $totalGeneralTemp;
 
         // Vérifier si l'action de suppression globale est déclenchée
         if (isset($_GET['action']) && $_GET['action'] === 'supprimer_tout') {
@@ -81,7 +117,7 @@ session_start();
             "</tr>";
         echo "<tr>",
                 "<td colspan=4> Total génréal : </td>" ,
-                "<td><trong>".number_format($totalGenral, 2, ",", "&nbsp;")."&nbsp;€</strong></td>",
+                "<td><trong>".number_format($totalGeneral, 2, ",", "&nbsp;")."&nbsp;€</strong></td>",
             "</tr>",
         "</tbody>";
       
