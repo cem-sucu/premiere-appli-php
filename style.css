@@ -1,5 +1,5 @@
 .directionRecap {
-    background-color: rgb(13, 165, 220);
+    background-color: rgb(10, 138, 185);
     text-decoration: none;
     width: 20%;
     height: 50px;
@@ -10,6 +10,10 @@
 
 a{
     text-decoration: none;
-    color: aliceblue;
+    color: white;
+ }
+
+ i{
+    color: rgb(3, 64, 80);
  }
 
