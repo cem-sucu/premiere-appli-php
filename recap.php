@@ -65,12 +65,14 @@ session_start();
             if ($action === 'incrementer') {
                 // Incrémenter la quantité du produit correspondant
                 $_SESSION['products'][$index]['qtt']++;
+                $_SESSION['products'][$index]['total'] = $_SESSION['products'][$index]['qtt'] * $_SESSION['products'][$index]['price'];
                 //permet d'éxécuter l'incrémentation
                 $totalGeneralTemp += $_SESSION['products'][$index]['price'];
             } elseif ($action === 'decrementer') {
                 // Décrémenter la quantité du produit correspondant
                 if ($_SESSION['products'][$index]['qtt'] > 1) {
                     $_SESSION['products'][$index]['qtt']--;
+                    $_SESSION['products'][$index]['total'] = $_SESSION['products'][$index]['qtt'] * $_SESSION['products'][$index]['price'];
                     //permet de faire la décrémentation
                     $totalGeneralTemp -= $_SESSION['products'][$index]['price'];
                 }
