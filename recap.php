@@ -40,18 +40,21 @@ session_start();
             "</thead>",
             "<tbody>";
         $totalGenral = 0;
+
         // Vérifier si l'action de suppression est déclenchée
-if (isset($_GET['action']) && $_GET['action'] === 'supprimer' && isset($_GET['index'])) {
-    $index = $_GET['index'];
-    // Vérifier si l'index existe dans le tableau des produits
-    if (isset($_SESSION['products'][$index])) {
-        // Supprimer le produit correspondant à l'index
-        unset($_SESSION['products'][$index]);
-        // Rediriger vers la page de récapitulatif après la suppression
-        header("Location: recap.php");
-        exit; // Terminer l'exécution du script après la redirection
-    }
-}
+        if (isset($_GET['action']) && $_GET['action'] === 'supprimer' && isset($_GET['index'])) {
+            $index = $_GET['index'];
+            // Vérifier si l'index existe dans le tableau des produits
+            if (isset($_SESSION['products'][$index])) {
+                // Supprimer le produit correspondant à l'index
+                unset($_SESSION['products'][$index]);
+                // Rediriger vers la page de récapitulatif après la suppression
+                header("Location: recap.php");
+                exit; // Terminer l'exécution du script après la redirection
+            }
+        }
+
+        //genere le tableur avec les éléments et le button supprimer
         foreach($_SESSION['products'] as $index => $product){
             echo "<tr>",
                     "<td>".$index."</td>",
@@ -63,6 +66,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'supprimer' && isset($_GET['in
                 "</tr>";
             $totalGenral += $product['total'];
         }
+
+
+        // Vérifier si l'action de suppression globale est déclenchée
+        if (isset($_GET['action']) && $_GET['action'] === 'supprimer_tout') {
+            // Supprimer tous les produits de la session
+            unset($_SESSION['products']);
+            // Rediriger vers la page de récapitulatif après la suppression
+            header("Location: recap.php");
+            exit; // Terminer l'exécution du script après la redirection
+        }
+        echo "<tr>",
+                "<td colspan='6'><a class='suppTout' href='recap.php?action=supprimer_tout'>Supprimer tous les produits <i class='fa-solid fa-trash'></i></a></td>",
+            "</tr>";
         echo "<tr>",
                 "<td colspan=4> Total génréal : </td>" ,
                 "<td><trong>".number_format($totalGenral, 2, ",", "&nbsp;")."&nbsp;€</strong></td>",
