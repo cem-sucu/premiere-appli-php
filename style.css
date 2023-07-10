@@ -1,0 +1,14 @@
+.directionRecap {
+    background-color: rgb(13, 165, 220);
+    text-decoration: none;
+    width: 20%;
+    height: 50px;
+    border-radius: 50px 50px;
+    float: right;
+    
+}
+
+a{
+    text-decoration: none;
+    color: aliceblue;
+ }

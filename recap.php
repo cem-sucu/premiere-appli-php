@@ -9,9 +9,14 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>Récapitulatif des produits</title>
 </head>
 <body>
+<div>
+        <button class="directionRecap">
+            <a href="index.php">retour à l'accueil</a></button>
+    </div>
     <?php
     //var_dump($_SESSION); // pour afficher les donnéé du tableau
     if(!isset($_SESSION['products']) || empty($_SESSION['products'])){
