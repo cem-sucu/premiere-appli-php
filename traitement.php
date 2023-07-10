@@ -3,6 +3,8 @@
 session_start();
 // Il  faut  donc  limiter  l'accès  à  traitement.php  par  les  seules  requêtes  HTTP provenant de la soumission de notre formulaire.
 
+// il faut itialiser la variable $product avant le bloc if pour éviter une erreur si les conditions ne sont pas remplies et non kuste après ou ailleurs
+$product = null;
 
 if(isset($_POST['submit'])){
 
@@ -17,7 +19,7 @@ if(isset($_POST['submit'])){
     $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
     
 
-    if($name && $price & $qtt){
+    if($name && $price && $qtt){
 
         $product = [
             "name" => $name,
@@ -27,8 +29,19 @@ if(isset($_POST['submit'])){
 
         ];
         $_SESSION['products'][] = $product;
-        // Cette ligne 27 est particulièrement efficace car :On sollicite le tableau de session $_SESSION fourni par PHP.On indique la clé "products" de ce tableau. Si cette clé n'existait pas auparavant (ex: l'utilisateur ajoute son tout premier produit), PHP la créera au sein de $_SESSION.Les deux crochets "[]"2sont un raccourci pour indiquer à cet emplacement que nous ajoutons  une  nouvelle  entrée  au  futur tableau  "products"  associé  à  cette  clé. $_SESSION["products"] doit être lui aussi un tableau afin d'y stocker de nouveaux produits par la suite.
+        // Cette ligne est efficace car :On sollicite le tableau de session $_SESSION fourni par PHP.On indique la clé "products" de ce tableau. Si cette clé n'existait pas auparavant (ex: l'utilisateur ajoute son tout premier produit), PHP la créera pour moi au sein de $_SESSION.Les deux crochets "[]" sont un raccourci pour indiquer à cet emplacement que nous ajoutons  une  nouvelle  entrée  au  futur tableau  "products"  associé  à  cette  clé. $_SESSION["products"] doit être lui aussi un tableau afin d'y stocker de nouveaux produits par la suite.
+
+
+
+        //afficher un message d'erreru si on ajoute bien le produits ou si l'on s'est trompé
+        $_SESSION['message'] = "<p  style='color:green'>Le produit a été ajouté avec succès !</p>";
+    } else {
+        $_SESSION['message'] = "<p  style='color:red'>Une erreur est survenue lors de l'ajout du produit.</p>";
     }
+    
+
+  
+    
 
 }
 

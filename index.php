@@ -50,6 +50,14 @@
         $numberOfProducts = isset($_SESSION['products']) ? count($_SESSION['products']) : 0;
 
         echo "Nombre de produits en session : " . $numberOfProducts;
+
+
+
+        // Vérifi si le message est présent dans la session 
+        if (isset($_SESSION['message'])) {
+            echo "<p>" . $_SESSION['message'] . "</p>";
+            unset($_SESSION['message']); // Supprime le message de la session pour qu'il ne soit affiché qu'une fois
+        }
         ?>
 </body>
 </html>
