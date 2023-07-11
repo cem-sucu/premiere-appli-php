@@ -69,8 +69,12 @@ session_start();
             if ($action === 'incrementer') {
                 // Incrémenter la quantité du produit correspondant
                 $_SESSION['products'][$index]['qtt']++;
+            
                 // var_dump($_SESSION);
                 $_SESSION['products'][$index]['total'] = $_SESSION['products'][$index]['qtt'] * $_SESSION['products'][$index]['price'];
+
+                // header("Location: recap.php") permet d'éviter la soumission de formulaire en double, ou encore de répéter une action lors du rafraîchissement de la page exemple ici lors de incrémentation ou décrementation effectuer
+                header("Location: recap.php");
                 //permet d'éxécuter l'incrémentation
                 $totalGeneralTemp + $_SESSION['products'][$index]['price'];
             } elseif ($action === 'decrementer') {
@@ -80,16 +84,20 @@ session_start();
                     $_SESSION['products'][$index]['total'] = $_SESSION['products'][$index]['qtt'] * $_SESSION['products'][$index]['price'];
                     //permet de faire la décrémentation
                     $totalGeneralTemp - $_SESSION['products'][$index]['price'];
-                }
+                // ici header("Location: recap.php") permet lors de l'action décrémenter de ne pas répété l'action lors du rafraîchissement de la page.   
+               header("Location: recap.php");
+               // exit permet de terminer le script immédiatement apres la redirection
+                exit; 
+            }
+                
             } elseif ($action === 'supprimer') {
                 //met a jour le total général 
                 $totalGeneralTemp -= $_SESSION['products'][$index]['total'];
                 // Supprimer le produit correspondant du tableau de session
                 unset($_SESSION['products'][$index]);
                 $_SESSION['products'] = array_values($_SESSION['products']); // Réorganiser les indices du tableau
-            }
+            }   
         }
-
 
         //genere le tableur avec les éléments et le button supprimer
         foreach($_SESSION['products'] as $index => $product){
@@ -107,6 +115,8 @@ session_start();
                     "<td><a href=\"recap.php?action=supprimer&index=".$index."\"><i class='fa-solid fa-trash'></i></a></td>",
                 "</tr>";
                 $totalGeneralTemp += $product['qtt'] * $product['price'];
+
+                
         }
 
         $totalGeneral = $totalGeneralTemp;
