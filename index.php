@@ -25,7 +25,8 @@
             <p>
                 <label>
                     Prix du produit :
-                    <input type="number" step="any" name="price">
+                    <!-- l'attribut min="0" dans le input permet d'éviter de permettre a l'utilisateur de rentrer une valeur négatif -->
+                    <input type="number" step="any" name="price" min="0" >
                 </label>
             </p>
             <p>
