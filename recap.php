@@ -19,9 +19,13 @@ session_start();
 </head>
 <body>
 <div>
+
+    <div class="menu">
         <button class="directionRecap">
             <a href="index.php">retour à l'accueil</a></button>
     </div>
+   
+    <div class="section">
     <?php
     //var_dump($_SESSION); // pour afficher les donnéé du tableau
     if(!isset($_SESSION['products']) || empty($_SESSION['products'])){
@@ -29,15 +33,15 @@ session_start();
     } 
     else{
         echo "<table>",
-            "<thead>",
-                "<tr>",
-                    "<th>#</th>",
-                    "<th>Nom</th>",
-                    "<th>Prix</th>",
-                    "<th>Quantité</th>",
-                    "<th>Total</th>",
-                "</tr>",
-            "</thead>",
+                "<thead>",
+                    "<tr>",
+                        "<th>#</th>",
+                        "<th>Nom</th>",
+                        "<th>Prix</th>",
+                        "<th>Quantité</th>",
+                        "<th>Total</th>",
+                    "</tr>",
+                "</thead>",
             "<tbody>";
      
         $totalGeneralTemp = 0;
@@ -65,16 +69,17 @@ session_start();
             if ($action === 'incrementer') {
                 // Incrémenter la quantité du produit correspondant
                 $_SESSION['products'][$index]['qtt']++;
+                // var_dump($_SESSION);
                 $_SESSION['products'][$index]['total'] = $_SESSION['products'][$index]['qtt'] * $_SESSION['products'][$index]['price'];
                 //permet d'éxécuter l'incrémentation
-                $totalGeneralTemp += $_SESSION['products'][$index]['price'];
+                $totalGeneralTemp + $_SESSION['products'][$index]['price'];
             } elseif ($action === 'decrementer') {
                 // Décrémenter la quantité du produit correspondant
                 if ($_SESSION['products'][$index]['qtt'] > 1) {
                     $_SESSION['products'][$index]['qtt']--;
                     $_SESSION['products'][$index]['total'] = $_SESSION['products'][$index]['qtt'] * $_SESSION['products'][$index]['price'];
                     //permet de faire la décrémentation
-                    $totalGeneralTemp -= $_SESSION['products'][$index]['price'];
+                    $totalGeneralTemp - $_SESSION['products'][$index]['price'];
                 }
             } elseif ($action === 'supprimer') {
                 //met a jour le total général 
@@ -93,9 +98,9 @@ session_start();
                     "<td>".$product['name']."</td>",
                     "<td>".number_format($product['price'], 2, ",", "&nbsp;")."&nbsp€"."</td>",
                     "<td>",
-                        "<a href='recap.php?action=incrementer&index=".$index."'><i class='fa-solid fa-plus'></i></a>",
-                        "&nbsp;".$product['qtt']."&nbsp;",
-                        "<a href='recap.php?action=decrementer&index=".$index."'><i class='fa-solid fa-minus'></i></a>",
+                    "<a href='recap.php?action=decrementer&index=".$index."'><i class='fa-solid fa-minus'></i></a>",
+                    "&nbsp;".$product['qtt']."&nbsp;",
+                    "<a href='recap.php?action=incrementer&index=".$index."'><i class='fa-solid fa-plus'></i></a>",
                     "</td>",
                     "<td>".$product['qtt']."</td>",
                     "<td>".number_format($product['total'], 2, ",", "&nbsp;")."&nbsp€"."</td>",
@@ -129,5 +134,6 @@ session_start();
         
         
         ?>
+        </div>
 </body>
 </html>

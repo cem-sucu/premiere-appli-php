@@ -7,57 +7,59 @@
     <title>Ajouter produit</title>
 </head>
 <body>
-    <div>
+    <div class="menu">
         <button class="directionRecap">
             <a href="recap.php">Voir votre récapitulatif</a></button>
     </div>
-    <h1>Ajouter un produit</h1>
-    <!-- dans forme ACTION indique  la  cible  du  formulaire,  le  fichier  à  atteindre  lorsque  l'utilisateur soumettra le formulaire   -->
-    <!-- dans forme METHODE précise  par  quelle  méthode  HTTP  les  données  du  formulaire  seront transmises au serveur -->
-    <form action="traitement.php" method="post">
-        <p>
-            <label>
-                Nom du produit :
-                <input type="text" name="name"> <!-- l'attribut name, price et qtt permet de lasser le contenu de la saisie dans des clés portant le nom choisi. -->
-            </label>
-        </p>
-        <p>
-            <label>
-                Prix du produit :
-                <input type="number" step="any" name="price">
-            </label>
-        </p>
-        <p>
-            <label>
-                Quantité désiré :
-                <input type="number" name="qtt" value="1">
-            </label>
-        </p>
-        <p>
-            <input type="submit" name="submit" value="Ajouter le produit">
-        </p>
-    </form>
+    <div class="section">
+        <h1>Ajouter un produit</h1>
+        <!-- dans forme ACTION indique  la  cible  du  formulaire,  le  fichier  à  atteindre  lorsque  l'utilisateur soumettra le formulaire   -->
+        <!-- dans forme METHODE précise  par  quelle  méthode  HTTP  les  données  du  formulaire  seront transmises au serveur -->
+        <form action="traitement.php" method="post">
+            <p>
+                <label>
+                    Nom du produit :
+                    <input type="text" name="name"> <!-- l'attribut name, price et qtt permet de lasser le contenu de la saisie dans des clés portant le nom choisi. -->
+                </label>
+            </p>
+            <p>
+                <label>
+                    Prix du produit :
+                    <input type="number" step="any" name="price">
+                </label>
+            </p>
+            <p>
+                <label>
+                    Quantité désiré :
+                    <input type="number" name="qtt" value="1">
+                </label>
+            </p>
+            <p>
+                <input type="submit" name="submit" value="Ajouter le produit">
+            </p>
+        </form>
 
-    <?php 
-    // l'appel à session_start() en début de fichier est important car ici j'utilise des sessions dans les pages suivantes (traitement.php et recap.php). Sans cet appel, on peux pas accéder aux données de session ou enregistrer de nouvelles données dans la session.
-    //En gros, session_start() initialise la gestion des sessions pour  l'application web et permet d'utiliser le tableau $_SESSION pour stocker et récupérer des données spécifiques à chaque utilisateur.
-    session_start();
+        <?php 
+        // l'appel à session_start() en début de fichier est important car ici j'utilise des sessions dans les pages suivantes (traitement.php et recap.php). Sans cet appel, on peux pas accéder aux données de session ou enregistrer de nouvelles données dans la session.
+        //En gros, session_start() initialise la gestion des sessions pour  l'application web et permet d'utiliser le tableau $_SESSION pour stocker et récupérer des données spécifiques à chaque utilisateur.
+        session_start();
 
-        // isset($_SESSION['products']) vérifie si le panier (la variable $_SESSION['products']) existe. Si le panier existe, cela signifie qu'on ajouté des jouets.
-        // count($_SESSION['products']) compte combien de jouets on dans le panier. Cela nous donne le nombre total de jouets.
-        // ? et : sont comme des instructions spéciales. Ils disent "Si le panier existe, fais cela. Sinon, fais cela." on peut tres bien le remplacer par un if et else.
-        // 0 est le nombre zéro. C'est ce que nous affichons si on n'as pas encore ajouté de jouets.
-        $numberOfProducts = isset($_SESSION['products']) ? count($_SESSION['products']) : 0;
+            // isset($_SESSION['products']) vérifie si le panier (la variable $_SESSION['products']) existe. Si le panier existe, cela signifie qu'on ajouté des jouets.
+            // count($_SESSION['products']) compte combien de jouets on dans le panier. Cela nous donne le nombre total de jouets.
+            // ? et : sont comme des instructions spéciales. Ils disent "Si le panier existe, fais cela. Sinon, fais cela." on peut tres bien le remplacer par un if et else.
+            // 0 est le nombre zéro. C'est ce que nous affichons si on n'as pas encore ajouté de jouets.
+            $numberOfProducts = isset($_SESSION['products']) ? count($_SESSION['products']) : 0;
 
-        echo "Nombre de produits en session : " . $numberOfProducts;
+            echo "Nombre de produits en session : " . $numberOfProducts;
 
 
 
-        // Vérifi si le message est présent dans la session 
-        if (isset($_SESSION['message'])) {
-            echo "<p>" . $_SESSION['message'] . "</p>";
-            unset($_SESSION['message']); // Supprime le message de la session pour qu'il ne soit affiché qu'une fois
-        }
-        ?>
+            // Vérifi si le message est présent dans la session 
+            if (isset($_SESSION['message'])) {
+                echo "<p>" . $_SESSION['message'] . "</p>";
+                unset($_SESSION['message']); // Supprime le message de la session pour qu'il ne soit affiché qu'une fois
+            }
+            ?>
+        </div>
 </body>
 </html>
