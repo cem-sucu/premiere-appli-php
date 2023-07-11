@@ -75,15 +75,12 @@ session_start();
 
                 // header("Location: recap.php") permet d'éviter la soumission de formulaire en double, ou encore de répéter une action lors du rafraîchissement de la page exemple ici lors de incrémentation ou décrementation effectuer
                 header("Location: recap.php");
-                //permet d'éxécuter l'incrémentation
-                $totalGeneralTemp + $_SESSION['products'][$index]['price'];
+                exit;
             } elseif ($action === 'decrementer') {
                 // Décrémenter la quantité du produit correspondant
                 if ($_SESSION['products'][$index]['qtt'] > 1) {
                     $_SESSION['products'][$index]['qtt']--;
                     $_SESSION['products'][$index]['total'] = $_SESSION['products'][$index]['qtt'] * $_SESSION['products'][$index]['price'];
-                    //permet de faire la décrémentation
-                    $totalGeneralTemp - $_SESSION['products'][$index]['price'];
                 // ici header("Location: recap.php") permet lors de l'action décrémenter de ne pas répété l'action lors du rafraîchissement de la page.   
                header("Location: recap.php");
                // exit permet de terminer le script immédiatement apres la redirection
@@ -112,7 +109,7 @@ session_start();
                     "</td>",
                     "<td>".$product['qtt']."</td>",
                     "<td>".number_format($product['total'], 2, ",", "&nbsp;")."&nbsp€"."</td>",
-                    "<td><a href=\"recap.php?action=supprimer&index=".$index."\"><i class='fa-solid fa-trash'></i></a></td>",
+                    "<td><a href=\"recap.php?action=supprimrier&index=".$index."\"><i class='fa-solid fa-trash'></i></a></td>",
                 "</tr>";
                 $totalGeneralTemp += $product['qtt'] * $product['price'];
 
@@ -121,16 +118,9 @@ session_start();
 
         $totalGeneral = $totalGeneralTemp;
 
-        // Vérifier si l'action de suppression globale est déclenchée
-        if (isset($_GET['action']) && $_GET['action'] === 'supprimer_tout') {
-            // Supprimer tous les produits de la session
-            unset($_SESSION['products']);
-            // Rediriger vers la page de récapitulatif après la suppression
-            header("Location: recap.php");
-            exit; // Terminer l'exécution du script après la redirection
-        }
+
         echo "<tr>",
-                "<td colspan='6'><a class='suppTout' href='recap.php?action=supprimer_tout'>Supprimer tous les produits <i class='fa-solid fa-trash'></i></a></td>",
+                "<td colspan='6'><a class='suppTout' href='traitement.php?action=supprimer_tout'>Supprimer tous les produits <i class='fa-solid fa-trash'></i></a></td>",
             "</tr>";
         echo "<tr>",
                 "<td colspan=4> Total génréal : </td>" ,

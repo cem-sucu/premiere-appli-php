@@ -15,29 +15,38 @@
         <h1>Ajouter un produit</h1>
         <!-- dans forme ACTION indique  la  cible  du  formulaire,  le  fichier  à  atteindre  lorsque  l'utilisateur soumettra le formulaire   -->
         <!-- dans forme METHODE précise  par  quelle  méthode  HTTP  les  données  du  formulaire  seront transmises au serveur -->
-        <form action="traitement.php" method="post">
+        <form action="traitement.php?action=ajouterProduit" method="post">
             <p>
                 <label>
-                    Nom du produit :
+                   <span> Nom du produit  </span>
                     <input type="text" name="name"> <!-- l'attribut name, price et qtt permet de lasser le contenu de la saisie dans des clés portant le nom choisi. -->
                 </label>
             </p>
             <p>
                 <label>
-                    Prix du produit :
+                   <span> Prix du produit  </span>
                     <!-- l'attribut min="0" dans le input permet d'éviter de permettre a l'utilisateur de rentrer une valeur négatif -->
                     <input type="number" step="any" name="price" min="0" >
                 </label>
             </p>
             <p>
                 <label>
-                    Quantité désiré :
+                   <span> Quantité désiré  </span>
                     <input type="number" name="qtt" value="1">
+                </label>
+            </p>
+            <p>
+                <label>
+                   <span> Description du produit  </span>
+                    <textarea rows="4" cols="30"> </textarea>
                 </label>
             </p>
             <p>
                 <input type="submit" name="submit" value="Ajouter le produit">
             </p>
+                </label>
+            </p>
+            
         </form>
 
         <?php 
