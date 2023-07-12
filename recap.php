@@ -34,7 +34,7 @@
             echo "<table>",
                     "<thead>",
                         "<tr>",
-                            "<th>#</th>",
+                            // "<th>#</th>",
                             "<th>Nom</th>",
                             "<th>Prix</th>",
                             "<th>Quantité</th>",
@@ -48,7 +48,7 @@
 
             foreach ($_SESSION['products'] as $index => $product) {
                 echo "<tr>",
-                        "<td>".$index."</td>",
+                        // "<td>".$index."</td>",
                         "<td>".$product['name']."</td>",
                         "<td>".number_format($product['price'], 2, ",", "&nbsp;")."&nbsp;€"."</td>",
                         "<td>",

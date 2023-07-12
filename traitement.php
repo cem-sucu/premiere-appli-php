@@ -10,6 +10,7 @@ $product = null;
 
 switch ($_GET["action"]) {
 
+    //la case ajouterProduit: lorsque nous voulons ajouter un nouveau jouet à notre collection. Nous devons remplir un formulaire avec le nom du jouet, son prix et la quantité que nous avons. Si nous remplissons correctement le formulaire, la machine ajoute le jouet à notre collection et nous dit que c'est un succès. Sinon, elle nous dit qu'il y a eu une erreur.
     case "ajouterProduit":
         if (isset($_POST['submit'])) {
 
@@ -44,6 +45,7 @@ switch ($_GET["action"]) {
         header("Location: index.php");
         break;
 
+       
     case "incrementer":
         if (isset($_GET['index'])) {
             $index = $_GET['index'];
@@ -53,8 +55,10 @@ switch ($_GET["action"]) {
             }
         }
         header("Location: recap.php");
-        break;
+        break; 
+        //la case INCREMENTER : je vérifie si la variable "index" est défini dans les parametre de L'URL ($_GET['index']). il faut spécifié l'indice du produit que nous voulons incrémenter. ensuite elle récupère la valeur de l'indice depuis la variable 'index' et la stock dans la variable $index.La condition suivante vérifie si le produit correspondant à l'indice existe dans le tableau $_SESSION['products'] et si la quantité de ce produit est supérieure ou égale à 1. Cela garantit que nous avons ce produit dans notre collection et que nous pouvons l'incrémenter. si c'est oui elle incrémente en ajoutant +1 a $_SESSION['products'][$index]['qtt'].  Elle met également à jour le total du produit en multipliant la nouvelle quantité par le prix du produit ($_SESSION['products'][$index]['qtt'] * $_SESSION['products'][$index]['price']).Enfin, elle redirige l'utilisateur vers la page "recap.php" pour afficher le récapitulatif mis à jour de la collection de produits.
 
+        
     case "decrementer":
         if (isset($_GET['index'])) {
             $index = $_GET['index'];
@@ -89,4 +93,7 @@ switch ($_GET["action"]) {
 ?>
 
 
+
+
+<!--  -->
 
