@@ -74,10 +74,23 @@
                 "<td><strong>".number_format($totalGeneral, 2, ",", "&nbsp;")."&nbsp;€</strong></td>",
                 "<td></td>",
                 "</tr>",
-                "</tbody>";
-        }
+                "</tbody>"; 
+
+
+                 //ma modal
+                echo "<div class='maModal'>".
+                        "<img src='chemin/vers/le/dossier/upload/".$_FILES['file']['nameImage']."' alt=''>".
+                        "<p>".$product['description']."</p>".
+                    "</div>";
         echo "</table>";
+
+                
+        }
+      
         ?>
     </div>
+
+        
+
 </body>
 </html>

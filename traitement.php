@@ -27,16 +27,21 @@ switch ($_GET["action"]) {
             // ici je récupère les données envoyées via la méthode POST avec le nom de champ "description". avec l'argument INPUT_POST passé a la fonction filter_input, j'indique que la donnée à filtrer provient de la méthode POST d'un formulaire HTML.
             $description = filter_input(INPUT_POST, "description",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+            // pour écupérer les fichier du formulaire
+            // La superglobale $_FILES est un tableau associatif qui contient plusieurs informations sur le fichier téléchargé, telles que son nom, son type MIME, sa taille et son emplacement temporaire sur le serveur
+            // Par exemple, on peut accéder au nom du fichier avec $file['name'], au type MIME avec $file['type'], à la taille avec $file['size'], et à l'emplacement temporaire avec $file['tmp_name'].
+            $file = $_FILES['file'];
 
             // si tout les input $name, $price, $qtt, $description sont saisis via le formulaire, dans ce cas le code a l'intérieur du if sera exécuté : 
                 //$description n'étant pas un <input> mais un <texteare> il faut utiliser la function trim() pour supprimer les espaces au début et à la fin d'une chaîne de caractères. car textarea permet de base de valider sans rien ecrire car meme vide il est afficher comme rempli la zone de texte.  trim($description) !== '' cela vérifie si le contenu de la variable $description est vide ou non après avoir supprimé les espaces inutiles.
-            if ($name && $price && $qtt && $description) {
+            if ($name && $price && $qtt && $description && $_FILES) {
                 //je créé mon tableau associatif avec tout les clé associé a leurs valeurs
                 $product = [
                     "name" => $name,
                     "price" => $price,
                     "qtt" => $qtt,
                     "description" => $description,
+                    "file" => $_FILES,
                     "total" => $price * $qtt,
                 ];
                 // le tableau $product on l'ajoute dans la variable $_SESSION['product],  qui représente le panier des produits.
@@ -96,14 +101,21 @@ switch ($_GET["action"]) {
         header("Location: recap.php");
         break;
 
+    case "uploadImage":
+        if(isset($_FILES['file'])){
+            $tmpNameImage = $_FILES['file']['tmp_name'];
+            $nameImage = $_FILES['file']['nameImage'];
+            $sizeImage = $_FILES['file']['sizeImage'];
+            $errorImage = $_FILES['file']['errorImage'];
+            move_uploaded_file($tmpName, './upload/'.$name);
+        }
+        header("Location: recap.php");
+        break;
+
     default:
         header("Location: index.php");
         break;
 }
 ?>
 
-
-
-
-<!--  -->
 

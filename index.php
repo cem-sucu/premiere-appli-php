@@ -39,9 +39,12 @@
     </div>
     <div class="sectionHome">
         <h1>Ajouter un produit</h1>
+
+
         <!-- dans forme ACTION indique  la  cible  du  formulaire,  le  fichier  à  atteindre  lorsque  l'utilisateur soumettra le formulaire   -->
-        <!-- dans forme METHODE précise  par  quelle  méthode  HTTP  les  données  du  formulaire  seront transmises au serveur -->
-        <form action="traitement.php?action=ajouterProduit" method="post">
+        <!-- dans forme METHODE précise  par  quelle  méthode  HTTP  les  données  du  formulaire  seront transmises au serveur.-->
+        <!-- enctype="multipart/form-data" est utilisé dans un formulaire HTML lorsque vous souhaitez permettre aux utilisateurs de télécharger des fichiers via le formulaire, sans ca les fichier seront mal transmis au serveur -->
+        <form action="traitement.php?action=ajouterProduit" method="post" enctype="multipart/form-data">
             <p>
                 <label>
                    <span class="designationInput"> Nom du produit  </span>
@@ -68,6 +71,15 @@
                     <textarea rows="4" name="description" cols="30"> </textarea>
                 </label>
             </p>
+
+            <!-- section upload image -->
+            <label for="file">
+                <span class="designationInput">Fichier</span>
+                <input type="file" name="file">
+            </label>
+
+
+            <!-- button submit -->
             <p>
                 <input class="validationButton" type="submit" name="submit" value="Ajouter le produit">
             </p>
