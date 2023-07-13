@@ -35,13 +35,14 @@ switch ($_GET["action"]) {
 
                 // Afficher un message d'erreur si on ajoute bien le produit ou si l'on s'est trompé
                 // En vert, le produit a été ajouté 
-                $_SESSION['message'] = "<p style='color:green'>Le produit a été ajouté avec succès !</p>";
+                $_SESSION['message'] = "<p class='messageValide'>Le produit a été ajouté avec succès !</p>";
             } else {
                 // Sinon, en rouge, une erreur est survenue lors de l'ajout
-                $_SESSION['message'] = "<p style='color:red'>Une erreur est survenue lors de l'ajout du produit.</p>";
+                $_SESSION['message'] = "<p class='messageError' >Une erreur est survenue lors de l'ajout du produit.</p>";
             }
         }
         
+        // header("refresh:3; url=index.php" );
         header("Location: index.php");
         break;
 

@@ -39,7 +39,7 @@
                             "<th>Prix</th>",
                             "<th>Quantité</th>",
                             "<th>Total</th>",
-                            "<th>Action</th>",
+                            "<th>Supprimer</th>",//action
                         "</tr>",
                     "</thead>",
                     "<tbody>";
