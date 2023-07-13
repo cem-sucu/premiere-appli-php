@@ -24,16 +24,25 @@ switch ($_GET["action"]) {
             // filter_input() renvoie en cas de succès la valeur assainie correspondant au champ traité, false si le filtre échoue ou null si le champ sollicité par le nettoyage n'existait pas dans la requête POST. Ainsi, pas de risque que l'utilisateur transmette des champs supplémentaires!
             $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
 
-            if ($name && $price && $qtt) {
+            // ici je récupère les données envoyées via la méthode POST avec le nom de champ "description". avec l'argument INPUT_POST passé a la fonction filter_input, j'indique que la donnée à filtrer provient de la méthode POST d'un formulaire HTML.
+            $description = filter_input(INPUT_POST, "description",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+
+            // si tout les input $name, $price, $qtt, $description sont saisis via le formulaire, dans ce cas le code a l'intérieur du if sera exécuté : 
+                //$description n'étant pas un <input> mais un <texteare> il faut utiliser la function trim() pour supprimer les espaces au début et à la fin d'une chaîne de caractères. car textarea permet de base de valider sans rien ecrire car meme vide il est afficher comme rempli la zone de texte.  trim($description) !== '' cela vérifie si le contenu de la variable $description est vide ou non après avoir supprimé les espaces inutiles.
+            if ($name && $price && $qtt && $description) {
+                //je créé mon tableau associatif avec tout les clé associé a leurs valeurs
                 $product = [
                     "name" => $name,
                     "price" => $price,
                     "qtt" => $qtt,
+                    "description" => $description,
                     "total" => $price * $qtt,
                 ];
+                // le tableau $product on l'ajoute dans la variable $_SESSION['product],  qui représente le panier des produits.
                 $_SESSION['products'][] = $product;
 
-                // Afficher un message d'erreur si on ajoute bien le produit ou si l'on s'est trompé
+                // $_SESSION['message'] affiche un message d'erreur si on ajoute bien le produit ou si l'on s'est trompé ou oublié une case
                 // En vert, le produit a été ajouté 
                 $_SESSION['message'] = "<p class='messageValide'>Le produit a été ajouté avec succès !</p>";
             } else {

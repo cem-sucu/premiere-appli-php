@@ -24,7 +24,7 @@
             <a href="index.php">retour à l'accueil</a></button>
     </div>
    
-    <div class="section">
+    <div class="sectionPanier">
         <?php
         session_start();
 
@@ -36,6 +36,7 @@
                         "<tr>",
                             // "<th>#</th>",
                             "<th>Nom</th>",
+                            "<th>Description</th>",
                             "<th>Prix</th>",
                             "<th>Quantité</th>",
                             "<th>Total</th>",
@@ -50,6 +51,7 @@
                 echo "<tr>",
                         // "<td>".$index."</td>",
                         "<td>".$product['name']."</td>",
+                        "<td>".$product['description']."</td>",
                         "<td>".number_format($product['price'], 2, ",", "&nbsp;")."&nbsp;€"."</td>",
                         "<td>",
                             "<a href='traitement.php?action=decrementer&index=".$index."'><i class='fa-solid fa-minus'></i></a>",

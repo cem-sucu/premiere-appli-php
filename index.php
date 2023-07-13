@@ -37,7 +37,7 @@
             <p class="panier"><i class="fa-solid fa-cart-shopping"></i><span class="panier-valeur"><?php echo $numberOfProducts; ?></span></p>
 
     </div>
-    <div class="section">
+    <div class="sectionHome">
         <h1>Ajouter un produit</h1>
         <!-- dans forme ACTION indique  la  cible  du  formulaire,  le  fichier  à  atteindre  lorsque  l'utilisateur soumettra le formulaire   -->
         <!-- dans forme METHODE précise  par  quelle  méthode  HTTP  les  données  du  formulaire  seront transmises au serveur -->
@@ -65,7 +65,7 @@
             <p>
                 <label>
                    <span class="designationInput"> Description du produit  </span>
-                    <textarea rows="4" cols="30"> </textarea>
+                    <textarea rows="4" name="description" cols="30"> </textarea>
                 </label>
             </p>
             <p>
