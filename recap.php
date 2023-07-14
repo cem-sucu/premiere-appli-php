@@ -57,6 +57,12 @@
                     "</tr>";
                 $totalGeneralTemp += $product['total']; 
                 
+                 //ma modal
+            echo "<div class='maModal'>";
+                    ?> <img class='modalImage' src="./upload/<?php echo $product['file']['name']; ?>" alt="Nom de l'image"> 
+                        <p> <?php echo $product['description'] ?></p>
+                    <?php
+                "</div>";
             
             }
 
@@ -71,13 +77,7 @@
                 "</tr>",
                 "</tbody>"; 
 
-            //ma modal
-            echo "<div class='maModal'>";
-                    ?> <img class='modalImage' src="./upload/<?php echo $product['file']['name']; ?>" alt="Nom de l'image"> 
-                        <p> <?php echo $product['description'] ?></p>
-                    <?php
-                
-                "</div>";
+           
             
 
         echo "</table>";                
