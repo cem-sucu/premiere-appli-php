@@ -20,7 +20,7 @@
         <?php
 
         // A la différence d'index.php, nous aurons besoin ici de parcourir le tableau de session, il est donc nécessaire d'appeler la fonction session_start() en début de fichier afin de récupérer, comme dit plus haut, la session correspondante à l'utilisateur.
-session_start();
+        session_start();
 
         if (!isset($_SESSION['products']) || empty($_SESSION['products'])) {
             echo "<p>Aucun produit en session</p>";
@@ -30,7 +30,7 @@ session_start();
                         "<tr>",
                             // "<th>#</th>",
                             "<th>Nom</th>",
-                            "<th>Description</th>",
+                            // "<th>Description</th>",
                             "<th>Prix</th>",
                             "<th>Quantité</th>",
                             "<th>Total</th>",
@@ -45,7 +45,7 @@ session_start();
                 echo "<tr>",
                         // "<td>".$index."</td>",
                         "<td>".$product['name']."</td>",
-                        "<td>".$product['description']."</td>",
+                        // "<td>".$product['description']."</td>",
                         "<td>".number_format($product['price'], 2, ",", "&nbsp;")."&nbsp;€"."</td>",
                         "<td>",
                             "<a href='traitement.php?action=decrementer&index=".$index."'><i class='fa-solid fa-minus'></i></a>",
@@ -57,11 +57,7 @@ session_start();
                     "</tr>";
                 $totalGeneralTemp += $product['total']; 
                 
-                //ma modal
-            echo "<div class='maModal'>".
-                    "<img src='./upload/'".$_FILES['file']['name']." alt=''>".
-                    "<p>".$product['description']."</p>".
-                "</div>";
+            
             }
 
             $totalGeneral = $totalGeneralTemp;
@@ -75,18 +71,24 @@ session_start();
                 "</tr>",
                 "</tbody>"; 
 
-
+            //ma modal
+            echo "<div class='maModal'>";
+                    ?> <img class='modalImage' src="./upload/<?php echo $product['file']['name']; ?>" alt="Nom de l'image"> 
+                        <p> <?php echo $product['description'] ?></p>
+                    <?php
+                
+                "</div>";
             
 
-        echo "</table>";
-
-                
+        echo "</table>";                
         }
-      
+
         ?>
     </div>
-
         
 
 </body>
 </html>
+
+
+

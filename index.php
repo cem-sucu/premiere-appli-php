@@ -32,20 +32,6 @@
             }
 
 
-            var_dump($_POST);
-            var_dump($_FILES);
-
-            //verifie si file existe
-            if(isset($_FILES['file'])){
-                $tmpName = $_FILES['file']['tmp_name'];
-                $name = $_FILES['file']['name'];
-                $size = $_FILES['file']['size'];
-                $error = $_FILES['file']['error'];
-        
-                move_uploaded_file($tmpName, './upload/'.$name);}
-
-
-
             ?>
     <div class="menu">
         <button class="directionRecap">
@@ -94,7 +80,7 @@
             <!-- section upload image -->
                 <label for="file">
                     <span class="designationInput">Fichier</span>
-                    <input type="file" name="file" id="file">
+                    <input type="file" name="file">
                 </label>
 
 
@@ -102,12 +88,9 @@
             <p>
                 <input class="validationButton" type="submit" name="submit" value="Ajouter le produit">
             </p>
-                </label>
-            </p>
             
         </form>
-
-         
+  
         </div>
 </body>
 </html>

@@ -123,3 +123,7 @@ i {
 
 /* mise en place de la modal */
 
+.modalImage{
+   max-width: 40%;
+   height: auto;
+}

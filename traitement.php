@@ -5,7 +5,7 @@
 session_start();
 // Il  faut  donc  limiter  l'accès  à  traitement.php  par  les  seules  requêtes  HTTP provenant de la soumission de notre formulaire.
 
-// il faut itialiser la variable $product avant le bloc if pour éviter une erreur si les conditions ne sont pas remplies et non kuste après ou ailleurs
+// il faut itialiser la variable $product avant le bloc if pour éviter une erreur si les conditions ne sont pas remplies et,  pas juste après ou ailleurs
 $product = null;
 
 switch ($_GET["action"]) {
@@ -54,6 +54,24 @@ switch ($_GET["action"]) {
                 // Sinon, en rouge, une erreur est survenue lors de l'ajout
                 $_SESSION['message'] = "<p class='messageError' >Une erreur est survenue lors de l'ajout du produit.</p>";
             }
+
+
+            // vérifie file
+            if (isset($product['file']) && $product['file']['error'] === 0) {
+                $tmpName = $product['file']['tmp_name'];
+                $name = $product['file']['name'];
+                $size = $product['file']['size'];
+                $error = $product['file']['error'];
+            
+                $destinationPath = './upload/' . $name;
+            
+                if (move_uploaded_file($tmpName, $destinationPath)) {
+                    echo "Le fichier a été téléchargé avec succès et déplacé vers le dossier de destination.";
+                } else {
+                    echo "Une erreur s'est produite lors du déplacement du fichier.";
+                }
+            }
+            
         }
         
         // header("refresh:3; url=index.php" );
@@ -99,7 +117,7 @@ switch ($_GET["action"]) {
     case "supprimer_tout":
         unset($_SESSION['products']);
         header("Location: recap.php");
-        break;
+        break;     
 
     default:
         header("Location: index.php");
