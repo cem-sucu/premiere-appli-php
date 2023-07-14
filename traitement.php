@@ -34,14 +34,14 @@ switch ($_GET["action"]) {
 
             // si tout les input $name, $price, $qtt, $description sont saisis via le formulaire, dans ce cas le code a l'intérieur du if sera exécuté : 
                 //$description n'étant pas un <input> mais un <texteare> il faut utiliser la function trim() pour supprimer les espaces au début et à la fin d'une chaîne de caractères. car textarea permet de base de valider sans rien ecrire car meme vide il est afficher comme rempli la zone de texte.  trim($description) !== '' cela vérifie si le contenu de la variable $description est vide ou non après avoir supprimé les espaces inutiles.
-            if ($name && $price && $qtt && $description && $_FILES) {
+            if ($name && $price && $qtt && $description && $file) {
                 //je créé mon tableau associatif avec tout les clé associé a leurs valeurs
                 $product = [
                     "name" => $name,
                     "price" => $price,
                     "qtt" => $qtt,
                     "description" => $description,
-                    "file" => $_FILES,
+                    "file" => $file,
                     "total" => $price * $qtt,
                 ];
                 // le tableau $product on l'ajoute dans la variable $_SESSION['product],  qui représente le panier des produits.
@@ -101,21 +101,13 @@ switch ($_GET["action"]) {
         header("Location: recap.php");
         break;
 
-    case "uploadImage":
-        if(isset($_FILES['file'])){
-            $tmpNameImage = $_FILES['file']['tmp_name'];
-            $nameImage = $_FILES['file']['nameImage'];
-            $sizeImage = $_FILES['file']['sizeImage'];
-            $errorImage = $_FILES['file']['errorImage'];
-            move_uploaded_file($tmpName, './upload/'.$name);
-        }
-        header("Location: recap.php");
-        break;
-
     default:
         header("Location: index.php");
         break;
-}
+
+
+    }
+    
 ?>
 
 

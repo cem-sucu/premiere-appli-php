@@ -30,6 +30,22 @@
                 unset($_SESSION['message']);// Supprime le message de la session pour qu'il ne soit affiché qu'une fois
                 header("refresh:2; url=index.php" ); // rafraichis la page au bout de 2seconde redire vers index.php 
             }
+
+
+            var_dump($_POST);
+            var_dump($_FILES);
+
+            //verifie si file existe
+            if(isset($_FILES['file'])){
+                $tmpName = $_FILES['file']['tmp_name'];
+                $name = $_FILES['file']['name'];
+                $size = $_FILES['file']['size'];
+                $error = $_FILES['file']['error'];
+        
+                move_uploaded_file($tmpName, './upload/'.$name);}
+
+
+
             ?>
     <div class="menu">
         <button class="directionRecap">
@@ -41,10 +57,12 @@
         <h1>Ajouter un produit</h1>
 
 
-        <!-- dans forme ACTION indique  la  cible  du  formulaire,  le  fichier  à  atteindre  lorsque  l'utilisateur soumettra le formulaire   -->
-        <!-- dans forme METHODE précise  par  quelle  méthode  HTTP  les  données  du  formulaire  seront transmises au serveur.-->
+        <!-- dans la balise forme ACTION indique  la  cible  du  formulaire,  le  fichier  à  atteindre  lorsque  l'utilisateur soumettra le formulaire   -->
+        <!-- dans la balise forme METHODE précise  par  quelle  méthode  HTTP  les  données  du  formulaire  seront transmises au serveur.-->
         <!-- enctype="multipart/form-data" est utilisé dans un formulaire HTML lorsque vous souhaitez permettre aux utilisateurs de télécharger des fichiers via le formulaire, sans ca les fichier seront mal transmis au serveur -->
-        <form action="traitement.php?action=ajouterProduit" method="post" enctype="multipart/form-data">
+        
+        <!-- section formulaire -->
+        <form action="traitement.php?action=ajouterProduit" method="POST" enctype="multipart/form-data">
             <p>
                 <label>
                    <span class="designationInput"> Nom du produit  </span>
@@ -68,15 +86,16 @@
             <p>
                 <label>
                    <span class="designationInput"> Description du produit  </span>
-                    <textarea rows="4" name="description" cols="30"> </textarea>
+                    <textarea rows="4" name="description" cols="30" wrap="hard" maxlength="60"> </textarea>
                 </label>
             </p>
 
+
             <!-- section upload image -->
-            <label for="file">
-                <span class="designationInput">Fichier</span>
-                <input type="file" name="file">
-            </label>
+                <label for="file">
+                    <span class="designationInput">Fichier</span>
+                    <input type="file" name="file" id="file">
+                </label>
 
 
             <!-- button submit -->

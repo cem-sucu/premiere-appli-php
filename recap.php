@@ -1,11 +1,3 @@
-<?php 
-
-// A la différence d'index.php, nous aurons besoin ici de parcourir le tableau de session, il est donc nécessaire d'appeler la fonction session_start() en début de fichier afin de récupérer, comme dit plus haut, la session correspondante à l'utilisateur.
-
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +18,9 @@
    
     <div class="sectionPanier">
         <?php
-        session_start();
+
+        // A la différence d'index.php, nous aurons besoin ici de parcourir le tableau de session, il est donc nécessaire d'appeler la fonction session_start() en début de fichier afin de récupérer, comme dit plus haut, la session correspondante à l'utilisateur.
+session_start();
 
         if (!isset($_SESSION['products']) || empty($_SESSION['products'])) {
             echo "<p>Aucun produit en session</p>";
@@ -61,27 +55,29 @@
                         "<td>".number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€"."</td>",
                         "<td><a href='traitement.php?action=supprimer&index=".$index."'><i class='fa-solid fa-trash'></i></a></td>",
                     "</tr>";
-                $totalGeneralTemp += $product['total'];
+                $totalGeneralTemp += $product['total']; 
+                
+                //ma modal
+            echo "<div class='maModal'>".
+                    "<img src='./upload/'".$_FILES['file']['name']." alt=''>".
+                    "<p>".$product['description']."</p>".
+                "</div>";
             }
 
             $totalGeneral = $totalGeneralTemp;
 
             echo "<tr>",
-                "<td colspan='6'><a class='suppTout' href='traitement.php?action=supprimer_tout'>Supprimer tous les produits <i class='fa-solid fa-trash'></i></a></td>",
+                    "<td colspan='6'><a class='suppTout' href='traitement.php?action=supprimer_tout'>Supprimer tous les produits <i class='fa-solid fa-trash'></i></a></td>",
                 "</tr>";
             echo "<tr>",
-                "<td colspan='4'>Total général:</td>",
-                "<td><strong>".number_format($totalGeneral, 2, ",", "&nbsp;")."&nbsp;€</strong></td>",
-                "<td></td>",
+                    "<td colspan='4'>Total général:</td>",
+                    "<td><strong>".number_format($totalGeneral, 2, ",", "&nbsp;")."&nbsp;€</strong></td>",
                 "</tr>",
                 "</tbody>"; 
 
 
-                 //ma modal
-                echo "<div class='maModal'>".
-                        "<img src='chemin/vers/le/dossier/upload/".$_FILES['file']['nameImage']."' alt=''>".
-                        "<p>".$product['description']."</p>".
-                    "</div>";
+            
+
         echo "</table>";
 
                 
