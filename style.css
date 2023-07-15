@@ -124,6 +124,14 @@ i {
 /* mise en place de la modal */
 
 .modalImage{
-   max-width: 40%;
-   height: auto;
+   width: 100%;
 }
+.maModal{
+   max-width: 30%;
+   /* display: none; */
+}
+
+.tableTD:hover ~ .maModal{
+   cursor: pointer;
+   display: block;
+}         
