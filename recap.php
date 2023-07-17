@@ -59,7 +59,7 @@
                 
                  //ma modal
             echo "<div class='maModal'>";
-                    ?> <img class='modalImage' src="./upload/<?php echo $product['file']['name']; ?>" alt="Nom de l'image"> 
+                    ?> <img class='modalImage' src="./upload/<?php echo $product['file']['name']; ?>" alt=""> 
                         <p> <?php echo $product['description'] ?></p>
                     <?php
                 "</div>";

@@ -78,11 +78,12 @@
 
 
             <!-- section upload image -->
+            <p>
                 <label for="file">
                     <span class="designationInput">Fichier</span>
                     <input type="file" name="file">
                 </label>
-
+            </p>
 
             <!-- button submit -->
             <p>
